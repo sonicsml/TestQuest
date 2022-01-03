@@ -58,35 +58,51 @@ public class TextQuest : MonoBehaviour
     _currentStep = nextStep;
     ContenLabel.text = _currentStep.Content;
   }
+
   private void SetStep(int nextStepNumberIndex)
   {
+    if (IsValidIndex(nextStepNumberIndex))
+    {
+      return;
+    }
+
     Step nextStep = _currentStep.Steps[nextStepNumberIndex];
     SetStep(nextStep);
   }
+
+  private bool IsValidIndex(int nextStepNumberIndex)
+  {
+    return nextStepNumberIndex < 0 || nextStepNumberIndex > _currentStep.Steps.Length - 1;
+  }
+
   private int GetStepNumber()
   {
     if (Input.GetKeyDown(KeyCode.Alpha1))
     {
       return 0;
     }
+
     if (Input.GetKeyDown(KeyCode.Alpha2))
     {
       return 1;
     }
+
     if (Input.GetKeyDown(KeyCode.Alpha3))
     {
       return 2;
     }
+
     if (Input.GetKeyDown(KeyCode.Alpha4))
     {
       return 3;
     }
+
     if (Input.GetKeyDown(KeyCode.Alpha5))
     {
       return 4;
     }
-    return -1;
 
+    return -1;
   }
 
   #endregion
